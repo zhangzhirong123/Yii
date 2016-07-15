@@ -2,11 +2,12 @@
 
 namespace app\controllers;
 use Yii;
-use app\models\MyGong;
+use app\models\MyGongs;
 use  yii\web\Session;
 use yii\web\Controller; 
-use app\models\UploadForm;  
-use yii\web\UploadedFile;  
+use app\models\ContactForm;
+use yii\web\UploadedFile; 
+
 class ManageController extends \yii\web\Controller
 {
 	/**
@@ -15,11 +16,15 @@ class ManageController extends \yii\web\Controller
     public $layout='xianmu';
     public function actionAdd()
     {
-         $model = new MyGong();
+         $model = new MyGongs();
         if(Yii::$app->request->isPost)
         {
             //接受数据
             $data = Yii::$app->request->post();
+            $atok=$this->actionRands(5);
+            $url=substr('http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'],0,strpos('http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'],'we'))."my_wei/we.php?str=".$atok;
+            // echo $url;
+            // print_r($data);die();
             //调用上传类
             $file = UploadedFile::getInstance($model, 'g_img');
             //定义路径
@@ -37,10 +42,18 @@ class ManageController extends \yii\web\Controller
                 //设置图片的存储位置
                 $file->saveAs($path.$imageName);
                 //赋值数组
-                $data['MyGong']['g_img']=$path.$imageName;
+                $data['MyGongs']['g_img']=$path.$imageName;
+                $data['MyGongs']['url']=$url;
+                $data['MyGongs']['token']=md5(rand(100,900));
+                $session = Yii::$app->session;
+                $userInfo = $session->get('userInfo');
+                // print_r($userInfo);die();
+                $uid = $userInfo['u_id'];
+                // echo $uid;die();
+                $data['MyGongs']['u_id']=$uid;
                 // print_r($data);die();
                 //后台押给model去验证
-                $model->attributes = $data['MyGong'];
+                $model->attributes = $data['MyGongs'];
                 if($model->insert())
                     {
                         $this->redirect(['lists']);
@@ -64,7 +77,7 @@ class ManageController extends \yii\web\Controller
         // $session = Yii::$app->session;
         // $userInfo = $session->get('userInfo');
         // print_r($userInfo);die();
-        $model = new MyGong();
+        $model = new MyGongs();
         $data=$model -> seach(5);
         // print_r($data);die();
     	return $this->renderPartial('lists',['data'=>$data]);
@@ -88,9 +101,19 @@ class ManageController extends \yii\web\Controller
       */
      public function actionDel($id)
      {
-         $model = new MyGong();
+         $model = new MyGongs();
          $model -> findOne($id)->delete();
          $this->redirect(['lists']);
      }
 
+      public function actionRands($length){
+        $str = 'abcdefghijklmnopqrstuvwxyz0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $randString = '';
+        $len = strlen($str)-1;
+        for($i = 0;$i < $length;$i ++)
+        {
+            $num = mt_rand(0, $len); $randString .= $str[$num];
+        }
+        return $randString ;
+    }
 }

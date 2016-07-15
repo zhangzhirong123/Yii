@@ -84,9 +84,9 @@ $(document).ready(function(){
     <th width="100px;">缩略图</th>
     <th>ID</th>
     <th>公众号名称</th>
-    <th>Appid</th>
-    <th>Appsecret</th>
-    <th>内容</th>
+    <th>API地址</th>
+    <th>Token</th>
+    <th>所属用户</th>
     <th>操作</th>
     
     </tr>
@@ -98,9 +98,9 @@ $(document).ready(function(){
     <td class="imgtd"><img width='40' height='40' src="<?=$v['g_img']?>"/></td>
     <td><?=$v['id']?></td>
     <td><?=$v['g_name']?></td>
-    <td><?=$v['g_id']?></td>
-    <td><?=$v['g_secret']?></td>
-    <td><?=$v['g_name']?></td>
+    <td><?=$v['url']?></td>
+    <td><?=$v['token']?></td>
+    <td><?=$v['user']?></td>
     <td><a onclick="return confirm('确定删除')" href="<?=Url::to(['manage/del', 'id' => $v['id']]);?>">删除</a>||<a href="">修改</a>||<a href="">垃圾箱</a></td>
    
     </tr>

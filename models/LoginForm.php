@@ -5,6 +5,7 @@ namespace app\models;
 use Yii;
 use yii\base\Model;
 
+
 /**
  * LoginForm is the model behind the login form.
  */
@@ -54,11 +55,17 @@ class LoginForm extends Model
         $user=$this->username;
         $pwd = $this->password;
         $data=User::find()->where(['user' => "$user"])->one();
+
         if($data->poss != $pwd)
         {
             $this->addError("error", '用户名或密码错误');
         }
-        return true;
+        else
+        {
+
+            return true;
+        }
+        
     }
     /**
      * Logs in a user using the provided username and password.

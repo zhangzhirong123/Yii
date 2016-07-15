@@ -36,13 +36,13 @@
 <td>操作系统</td>
 <td class="padleft">不限制</td>
 <td class="padleft">类Unix</td>
-<td class="w pdleft1">WINNT</td>
+<td class="w pdleft1"><?=  php_uname('s') ?></td>
 </tr>
 <tr>
 <td>PHP 版本</td>
 <td class="padleft">4.0</td>
 <td class="padleft">5.0</td>
-<td class="w pdleft1">5.5.30</td>
+<td class="w pdleft1"><?= PHP_VERSION?></td>
 </tr>
 <tr>
 <td>附件上传</td>

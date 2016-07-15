@@ -43,7 +43,7 @@ $(function(){
     <div class="user">
     <span><?php
         if (!empty($userInfo)) {
-            echo $userInfo['username'];
+            echo $userInfo['user'];
         }
     ?></span>
     <i>消息</i>

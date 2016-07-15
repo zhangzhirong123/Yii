@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50617
 File Encoding         : 65001
 
-Date: 2016-07-13 17:12:51
+Date: 2016-07-15 08:15:16
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -27,6 +27,9 @@ CREATE TABLE `my_gong` (
   `g_desc` varchar(255) DEFAULT NULL,
   `g_img` varchar(255) DEFAULT NULL,
   `is_show` varchar(255) DEFAULT '0',
+  `url` varchar(255) DEFAULT NULL,
+  `token` varchar(255) DEFAULT NULL,
+  `u_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -39,10 +42,10 @@ CREATE TABLE `my_gong` (
 -- ----------------------------
 DROP TABLE IF EXISTS `my_user`;
 CREATE TABLE `my_user` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `u_id` int(11) NOT NULL AUTO_INCREMENT,
   `user` varchar(255) DEFAULT NULL,
   `poss` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`u_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------

@@ -29,7 +29,7 @@ $form = ActiveForm::begin([
 
     <div class="form-group">
         <div class="col-lg-offset-1 col-lg-11">
-            <?= Html::submitButton('Login', ['class' => 'btn btn-primary']) ?>
+            <?= Html::submitButton('ok', ['class' => 'btn btn-primary']) ?>
         </div>
     </div>
 

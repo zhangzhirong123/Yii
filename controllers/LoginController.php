@@ -8,6 +8,7 @@ use yii\web\Controller;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use  yii\web\Session;
+use app\models\User;
 class LoginController extends \yii\web\Controller
 {
     public function actionIndex()
@@ -28,14 +29,15 @@ class LoginController extends \yii\web\Controller
             $model = new LoginForm();
 
             $data = Yii::$app->request->post();
-
+            // print_r($data);die();
     		$model->attributes = Yii::$app->request->post();
 
             if($model -> validate())
             {   
+                $data=User::find()->asArray()->where(['user' => $data['username']])->one();
+                // print_r($data);die();
                 $session = Yii::$app->session;
                 $session->open();
-                $session = Yii::$app->session;
                 $session->set('userInfo', $data);
                 $this->redirect(['index/index']);  
             }
