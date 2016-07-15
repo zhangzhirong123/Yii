@@ -36,6 +36,7 @@ class MyGongs extends \yii\db\ActiveRecord
         return [
             [['g_id', 'u_id'], 'integer'],
             [['g_name', 'g_secret', 'g_desc', 'g_img', 'is_show', 'token', 'url'], 'string', 'max' => 255],
+            [['g_name', 'g_secret', 'g_desc','g_id'], 'required'],
             [['g_img'], 'file', 'extensions' => 'jpg, png', 'mimeTypes' => 'image/jpeg, image/png',],
         ];
     }
@@ -47,11 +48,11 @@ class MyGongs extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'g_name' => 'G Name',
-            'g_id' => 'G ID',
-            'g_secret' => 'G Secret',
-            'g_desc' => 'G Desc',
-            'g_img' => 'G Img',
+            'g_name' => '公众号名称',
+            'g_id' => '公众号名称ID',
+            'g_secret' => 'APPSecret',
+            'g_desc' => '公众号描述',
+            'g_img' => '公众号图片',
             'is_show' => 'Is Show',
             'u_id' => 'U ID',
             'token' => 'Token',
