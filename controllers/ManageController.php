@@ -74,6 +74,7 @@ class ManageController extends \yii\web\Controller
      */
     public function actionLists()
     {
+
         // $session = Yii::$app->session;
         // $userInfo = $session->get('userInfo');
         // print_r($userInfo);die();

@@ -82,7 +82,6 @@ $(document).ready(function(){
     <thead>
     <tr>
     <th width="100px;">缩略图</th>
-    <th>ID</th>
     <th>公众号名称</th>
     <th>API地址</th>
     <th>Token</th>
@@ -96,7 +95,6 @@ $(document).ready(function(){
     <?php foreach($data['data'] as $v) { ?>
     <tr class="aa">
     <td class="imgtd"><img width='40' height='40' src="<?=$v['g_img']?>"/></td>
-    <td><?=$v['id']?></td>
     <td><?=$v['g_name']?></td>
     <td><?=$v['url']?></td>
     <td><?=$v['token']?></td>
