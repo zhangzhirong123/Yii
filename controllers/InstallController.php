@@ -37,7 +37,7 @@ class InstallController extends \yii\web\Controller
         $db=$post['db'];
        $uname=$post['uname'];
        $upwd=$post['upwd'];
-       $dbtem=$post['dbtem'];
+       // $dbtem=$post['dbtem'];
         if (@$link= mysql_connect("$host","$name","$pwd")){
             $db_selected = mysql_select_db("$db", $link);
                 if($db_selected){
@@ -79,7 +79,7 @@ class InstallController extends \yii\web\Controller
 						'username' => '".$post['dbname']."',
 						'password' => '".$post['dbpwd']."',
 						'charset' => 'utf8',
-						'tablePrefix' => '".my_."',   
+						'tablePrefix' => 'my_',   
 					];";
                 file_put_contents('../config/db.php',$str);
 

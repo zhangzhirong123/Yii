@@ -33,6 +33,12 @@ class IndexController extends \yii\web\Controller
         if(!is_file("assets/ok.php")){
              $this->redirect(['install/one1']);
         }
+        $session = Yii::$app->session;
+        $userInfo = $session->get('userInfo');
+        if(!$userInfo)
+        {
+            $this->redirect(['login/index']);
+        }
         return $this->renderPartial('index');
     }
    

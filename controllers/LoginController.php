@@ -56,5 +56,15 @@ class LoginController extends \yii\web\Controller
         
     }
 
-
+    /**
+     * 退出
+     */
+    public function actionOut()
+    {
+        $session = Yii::$app->session;
+        // $session->remove('userInfo');
+        unset($session['userInfo']);
+         // $this->redirect(['login/index']);
+        echo "<script>parent.location.href='index.php?r=login/index'</script>"; 
+    }
 }
