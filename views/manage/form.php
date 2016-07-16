@@ -23,7 +23,7 @@ $form = ActiveForm::begin([
     <?= $form->field($model, 'g_name') ?>
     <?= $form->field($model, 'g_secret') ?>
     <?= $form->field($model, 'g_id')?>
-    <?= $form->field($model, 'g_img')->fileInput();?> 
+    <?= $form->field($model, 'g_img')->fileInput(['multiple'=>true]);?> 
     <?= $form->field($model, 'g_desc')->textArea(['rows' => '6']) ?>
     
 
