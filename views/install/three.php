@@ -18,7 +18,7 @@
 	<div class="header">
 		<h1>UCenter 安装向导</h1>
 		<span>V1.6.0 简体中文 UTF8 版 20110501</span>	<div class="setup step2">
-		<h2>安装数据库</h2>
+		<h2>安装数据库：</h2>
 		<p>正在执行数据库安装</p>
 	</div>
 	<div class="stepstat">
