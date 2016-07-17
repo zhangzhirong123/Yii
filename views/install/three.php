@@ -18,7 +18,7 @@
 	<div class="header">
 		<h1>UCenter 安装向导</h1>
 		<span>V1.6.0 简体中文 UTF8 版 20110501</span>	<div class="setup step2">
-		<h2>安装数据库</h2>
+		<h2>安装数据库：</h2>
 		<p>正在执行数据库安装</p>
 	</div>
 	<div class="stepstat">
@@ -32,7 +32,7 @@
 	</div>
 </div>
 <div class="main"><form method="post" action="index.php?r=install/check">
-<div class="desc"><b>填写数据库信息</b></div><table class="tb2">
+<div class="desc"><b>填写数据库信息:</b></div><table class="tb2">
 <input name="step" value="2" type="hidden">
 
 <tbody><tr><th class="tbopt">&nbsp;数据库服务器:</th>
@@ -59,7 +59,7 @@
 <td><input name="dbtem" value="my_" size="35" class="txt" type="text" disabled="true"></td>
 <td>&nbsp;同一数据库运行多个论坛时，请修改前缀</td>
 </tr>
-</tbody></table><div class="desc"><b>填写管理员信息</b><br>请牢记 UCenter 创始人密码，凭该密码登陆 UCenter。</div><table class="tb2">
+</tbody></table><div class="desc"><b>填写管理员信息</b><br>请牢记 UCenter 创始人密码，凭该密码登陆 weixin</div><table class="tb2">
 <tbody>
 <tr>
     <th class="tbopt">&nbsp;创始人账号:</th>
