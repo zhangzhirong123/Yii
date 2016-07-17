@@ -32,7 +32,7 @@
 	</div>
 </div>
 <div class="main"><form method="post" action="index.php?r=install/check">
-<div class="desc"><b>填写数据库信息</b></div><table class="tb2">
+<div class="desc"><b>填写数据库信息:</b></div><table class="tb2">
 <input name="step" value="2" type="hidden">
 
 <tbody><tr><th class="tbopt">&nbsp;数据库服务器:</th>
