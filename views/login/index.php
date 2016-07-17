@@ -46,15 +46,15 @@
     <input name="_csrf" type="hidden" id="_csrf" value="<?= Yii::$app->request->csrfToken ?>">
     <ul>
     <li><input name="username" type="text" class="loginuser" />
-    <span style="color:#F00;"><?php if(!empty($error)){
+    <span style="color:#F00;"><?php if(!empty($error['username'])){
         echo $error['username'][0];
         }?></span>
     </li>
     <li><input name="password" type="password" class="loginpwd"/>
-    <span style="color:#F00;"><?php if(!empty($error)){
+    <span style="color:#F00;"><?php if(!empty($error['password'])){
         echo $error['password'][0];
         }?></span>
-        <span style="color:#F00;"><?php if(!empty($error)){
+        <span style="color:#F00;"><?php if(!empty($error['error'])){
         echo $error['error'][0];
         }?></span>
     </li>

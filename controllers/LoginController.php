@@ -43,8 +43,7 @@ class LoginController extends \yii\web\Controller
             }
             else
             {
-                // var_dump($model->getErrors());
-
+                // var_dump($model->getErrors());die;
                 return $this->renderPartial('index',['error'=>$model->getErrors()]);
             }
     		

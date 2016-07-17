@@ -66,7 +66,7 @@ class MyGongs extends \yii\db\ActiveRecord
         $query = $this->find()->select('*')->innerJoin('my_user','my_gong.u_id=my_user.u_id');
       
         $g_name = Yii::$app->request->post('g_name');
-        if($user)
+        if($g_name)
         {
             $query->andFilterWhere(['like','g_name',$g_name]);
         }

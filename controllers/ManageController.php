@@ -31,18 +31,20 @@ class ManageController extends \yii\web\Controller
             $path='upload/'.date("YmdH",time()).'/';
             if ($file)
             {
-                if(!file_exists($path))
-                {  
-                    mkdir($path,'777',true);
-                } 
+                // if(!file_exists($path))
+                // {  
+                //     mkdir($path,'777',true);
+                // } 
                 //获取后缀
                 $ext = $file->getExtension();
                 //定义图片名称
                 $imageName = time().rand(100,999).'.'.$ext;
                 //设置图片的存储位置
-                $file->saveAs($path.$imageName);
+                // $file->saveAs($path.$imageName);
+                $file->saveAs('upload/'.$imageName);
                 //赋值数组
-                $data['MyGongs']['g_img']=$path.$imageName;
+                // $data['MyGongs']['g_img']=$path.$imageName;
+                $data['MyGongs']['g_img']='upload/'.$imageName;
                 $data['MyGongs']['url']=$url;
                 $data['MyGongs']['token']=md5(rand(100,900));
                 $session = Yii::$app->session;
