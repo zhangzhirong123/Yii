@@ -32,6 +32,9 @@ class InstallController extends \yii\web\Controller
         $post=\Yii::$app->request->post();
         // print_r($post);die();
         $host=$post['dbhost'];
+        $host1 = substr($host,0,9);
+        $port  = substr($host, strpos($host, ':'));
+        $port1 = substr($port, 1);
         $name=$post['dbname'];
         $pwd=$post['dbpwd'];
         $db=$post['db'];
@@ -75,7 +78,7 @@ class InstallController extends \yii\web\Controller
                 $str="<?php
 					return [
 						'class' => 'yii\db\Connection',
-						'dsn' => 'mysql:host=".$post['dbhost'].";dbname=".$post['db']."',
+						'dsn' => 'mysql:host=".$host1.";port=".$port1.";dbname=".$post['db']."',
 						'username' => '".$post['dbname']."',
 						'password' => '".$post['dbpwd']."',
 						'charset' => 'utf8',

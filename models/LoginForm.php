@@ -56,7 +56,7 @@ class LoginForm extends Model
         $pwd = $this->password;
         $data=User::find()->where(['user' => "$user"])->one();
 
-        if($data->poss != $pwd)
+        if($data->poss != $pwd || $data->user != $user)
         {
             $this->addError("error", '用户名或密码错误');
         }
