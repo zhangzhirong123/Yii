@@ -59,7 +59,7 @@
 <td><input name="dbtem" value="my_" size="35" class="txt" type="text" disabled="true"></td>
 <td>&nbsp;同一数据库运行多个论坛时，请修改前缀</td>
 </tr>
-</tbody></table><div class="desc"><b>填写管理员信息</b><br>请牢记 UCenter 创始人密码，凭该密码登陆 UCenter。</div><table class="tb2">
+</tbody></table><div class="desc"><b>填写管理员信息</b><br>请牢记 UCenter 创始人密码，凭该密码登陆 weixin</div><table class="tb2">
 <tbody>
 <tr>
     <th class="tbopt">&nbsp;创始人账号:</th>
