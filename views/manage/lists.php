@@ -43,10 +43,14 @@ $(document).ready(function(){
 </head>
 
 <style>
-    .aa{
-        width: 40px;
-        height: 40px;
-    }
+   #url{
+    float: right;
+    cursor: pointer;
+   }
+   #token{
+    float: right;
+    cursor: pointer;
+   }
 </style>
 <body>
 
@@ -96,8 +100,8 @@ $(document).ready(function(){
     <tr class="aa">
     <td class="imgtd"><img width='40' height='40' src="<?=$v['g_img']?>"/></td>
     <td><?=$v['g_name']?></td>
-    <td><?=$v['url']?></td>
-    <td><?=$v['token']?></td>
+    <td><input type="text" id='content2' width="200"  value="<?=$v['url']?>"/><span id='url'>复制</span></td>
+    <td><input type="text" id='content1' value="<?=$v['token']?>"/><span id='token'>复制</span></td>
     <td><?=$v['user']?></td>
     <td><a onclick="return confirm('确定删除')" href="<?=Url::to(['manage/del', 'id' => $v['id']]);?>">删除</a>||<a href="">修改</a>||<a href="">垃圾箱</a></td>
    
@@ -174,3 +178,17 @@ $(document).ready(function(){
 </body>
 
 </html>
+<script>
+    $('#url').click(function(){
+        var Url=document.getElementById("content2");
+        Url.select(); // 选择对象
+        document.execCommand("Copy"); // 执行浏览器复制命令
+        alert("Ok");
+    })
+    $('#token').click(function(){
+        var Url=document.getElementById("content1");
+        Url.select(); // 选择对象
+        document.execCommand("Copy"); // 执行浏览器复制命令
+        alert("Ok");
+    })
+</script>

@@ -5,5 +5,5 @@
 						'username' => 'root',
 						'password' => '255',
 						'charset' => 'utf8',
-						'tablePrefix' => 'my_',   
+						'tablePrefix' => 'my_',  
 					];
