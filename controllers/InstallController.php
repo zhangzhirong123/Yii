@@ -32,7 +32,8 @@ class InstallController extends \yii\web\Controller
         $post=\Yii::$app->request->post();
         // print_r($post);die();
         $host=$post['dbhost'];
-        $host1 = substr($host,0,9);
+     
+        $host1 = substr($host,0,strpos($host, ":"));
         $port  = substr($host, strpos($host, ':'));
         $port1 = substr($port, 1);
         $name=$post['dbname'];
@@ -87,7 +88,7 @@ class InstallController extends \yii\web\Controller
                 file_put_contents('../config/db.php',$str);
 
             $str1="<?php
-                \$pdo=new PDO('mysql:127.0.0.1= $host;dbname=$db','$name','$pwd',array(PDO::MYSQL_ATTR_INIT_COMMAND=>'set names utf8'));
+                \$pdo=new PDO('mysql:host= $host;dbname=$db','$name','$pwd',array(PDO::MYSQL_ATTR_INIT_COMMAND=>'set names utf8'));
                    ?>";
             file_put_contents('./assets/abc.php',$str1);
                $sql="insert into my_user (user,poss) VALUES ('$uname','$upwd')";

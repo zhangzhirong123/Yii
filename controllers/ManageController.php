@@ -22,7 +22,7 @@ class ManageController extends \yii\web\Controller
             //接受数据
             $data = Yii::$app->request->post();
             $atok=$this->actionRands(5);
-            $url=substr('http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'],0,strpos('http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'],'we'))."my_wei/we.php?str=".$atok;
+            $url=substr('http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'],0,strpos('http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'],'we'))."web/rong.php?str=".$atok;
             // echo $url;
             // print_r($data);die();
             //调用上传类
