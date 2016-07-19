@@ -7,6 +7,9 @@
 
 $str=$_GET['str'];
 include_once("./assets/abc.php");
+
+ 
+
 $pdo ->query("set names utf8");
 $rs = $pdo->query("SELECT * FROM my_gong where atok ='$str'");
 $result_arr = $rs->fetchAll();
@@ -15,7 +18,7 @@ foreach($result_arr as $val){
     $token=$val['atoken'];
     $tok=$val['atok'];
     $url=$val['aurl'];
-    $id=$val['aid'];
+    $id=$val['id'];
     $appid=$val['g_id'];
     $appsecret=$val['g_secret'];
 }
@@ -27,6 +30,12 @@ foreach($result_arr as $val){
 define("TOKEN", "$token");
 define("APPID", "$appid");
 define("APPSECRET", "$appsecret");
+define("ID","$id");
+//查出库里的关键字
+// $res=$pdo->query("select rcontent from my_rules inner join my_rules_text on my_rules.rid = my_rules_text.rid where rcontent='荣' and g_id=".ID)->fetchAll();
+// print_r($res);die(); 
+
+
 $wechatObj = new wechatCallbackapiTest();
 //验证服务器和公众平台建立连接
 //如果已经成功建立连接后把该方法注释
@@ -120,49 +129,57 @@ class wechatCallbackapiTest
                 {
                     //定义回复的类型
                     //如果用户输入音乐
-                    if($keyword=='音乐')
+                    $res=$pdo->query("select rcontent from my_rules inner join my_rules_text on my_rules.rid = my_rules_text.rid where rcontent='$keyword' and g_id= ".ID)->fetchAll();
+                    if($re[0]['rcontent'])
                     {
-                        $msgType = "music";
-                        $title = "I Love You";
-                        $description = "北美第一高音";
-                        $music_url = "http://www.yyzljg.com/wechat/music.mp3";
-                        $hp='http://www.yyzljg.com/wechat/music.mp3';
-                        //sprintf 格式化字符串
-                        $resultStr = sprintf($musicTpl, $fromUsername, $toUsername, $time, $msgType, $title, $description, $music_url, $hp);
+                        $msgType = "text";
+                        $contentStr = $res[0]["rcontent"];
+                        $resultStr = sprintf($textTpl, $fromUsername, $toUsername, $time, $msgType, $contentStr);
                         echo $resultStr;
                     }
-                    elseif($keyword == '单图文')
-                    {
-                        //定义回复的类型
-                        $msgType = "news";
-                        $count = 1;
-                        $str='<item>
-                                <Title><![CDATA[世界第一等]]></Title>
-                                <Description><![CDATA[其实什么好学呢]]></Description>
-                                <PicUrl><![CDATA[http://llzif.top/weixin/pic/1.jpg]]></PicUrl>
-                                <Url><![CDATA[http://llzif.top/weixin/pic/1.jpg]]></Url>
-                                </item>';
-                        //sprintf 格式化字符串
-                        $resultStr = sprintf($newsTpl, $fromUsername, $toUsername, $time, $msgType, $count,$str);
-                        echo $resultStr;
-                    }
-                    elseif($keyword == '多图文')
-                    {
-                        //定义回复的类型
-                        $msgType = "news";
-                        $count = 4;
-                        $str='';
-                        for ($i=1; $i <= $count; $i++) { 
-                            $str.="<item>
-                                <Title><![CDATA[世界第一等]]></Title>
-                                <Description><![CDATA[其实什么好学呢]]></Description>
-                                <PicUrl><![CDATA[http://llzif.top/weixin/pic/{$i}.jpg]]></PicUrl>
-                                <Url><![CDATA[http://llzif.top/weixin/pic/{$i}.jpg]]></Url>
-                                </item>";
-                        }
-                          $resultStr = sprintf($newsTpl, $fromUsername, $toUsername, $time, $msgType, $count,$str);
-                        echo $resultStr;
-                    }
+                    // if($keyword=='音乐')
+                    // {
+                    //     $msgType = "music";
+                    //     $title = "I Love You";
+                    //     $description = "北美第一高音";
+                    //     $music_url = "http://www.yyzljg.com/wechat/music.mp3";
+                    //     $hp='http://www.yyzljg.com/wechat/music.mp3';
+                    //     //sprintf 格式化字符串
+                    //     $resultStr = sprintf($musicTpl, $fromUsername, $toUsername, $time, $msgType, $title, $description, $music_url, $hp);
+                    //     echo $resultStr;
+                    // }
+                    // elseif($keyword == '单图文')
+                    // {
+                    //     //定义回复的类型
+                    //     $msgType = "news";
+                    //     $count = 1;
+                    //     $str='<item>
+                    //             <Title><![CDATA[世界第一等]]></Title>
+                    //             <Description><![CDATA[其实什么好学呢]]></Description>
+                    //             <PicUrl><![CDATA[http://llzif.top/weixin/pic/1.jpg]]></PicUrl>
+                    //             <Url><![CDATA[http://llzif.top/weixin/pic/1.jpg]]></Url>
+                    //             </item>';
+                    //     //sprintf 格式化字符串
+                    //     $resultStr = sprintf($newsTpl, $fromUsername, $toUsername, $time, $msgType, $count,$str);
+                    //     echo $resultStr;
+                    // }
+                    // elseif($keyword == '多图文')
+                    // {
+                    //     //定义回复的类型
+                    //     $msgType = "news";
+                    //     $count = 4;
+                    //     $str='';
+                    //     for ($i=1; $i <= $count; $i++) { 
+                    //         $str.="<item>
+                    //             <Title><![CDATA[世界第一等]]></Title>
+                    //             <Description><![CDATA[其实什么好学呢]]></Description>
+                    //             <PicUrl><![CDATA[http://llzif.top/weixin/pic/{$i}.jpg]]></PicUrl>
+                    //             <Url><![CDATA[http://llzif.top/weixin/pic/{$i}.jpg]]></Url>
+                    //             </item>";
+                    //     }
+                    //       $resultStr = sprintf($newsTpl, $fromUsername, $toUsername, $time, $msgType, $count,$str);
+                    //     echo $resultStr;
+                    // }
                     else
                     {
                         //定义回复的类型

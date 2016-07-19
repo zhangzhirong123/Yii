@@ -1,9 +1,3 @@
-<?php 
-    $this->title="列表";
-    //引入分页组件
-    use yii\widgets\LinkPager;
-    use yii\helpers\Url;
-?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -41,17 +35,12 @@ $(document).ready(function(){
 });
 </script>
 </head>
-
 <style>
-   .url{
-    float: right;
-    cursor: pointer;
-   }
-   .token{
-    float: right;
-    cursor: pointer;
-   }
+    .aa{
+        height: 50px;
+    }
 </style>
+
 <body>
 
 	<div class="place">
@@ -85,51 +74,50 @@ $(document).ready(function(){
     
     <thead>
     <tr>
-    <th width="100px;">缩略图</th>
-    <th>公众号名称</th>
-    <th>API地址</th>
-    <th>Token</th>
-    <th>所属用户</th>
-    <th>操作</th>
     
+    <th>ID</th>
+    <th>标题</th>
+    <th>关键字</th>
+    <th>回复内容</th>
+    <th>操作</th>
     </tr>
     </thead>
     
     <tbody>
-    <?php foreach($data['data'] as $k => $v) { ?>
+    <?php foreach($data as $v){ ?>
     <tr class="aa">
-    <td class="imgtd"><img width='40' height='40' src="<?=$v['g_img']?>"/></td>
-    <td><?=$v['g_name']?></td>
-    <td><input type="text" id="content1_<?php echo $k?>"  value="<?php echo $v['url']?>"/>
-                    <button class="url" onclick="copy1(<?php echo $k?>)">复制</button></td>
-    <td><input type="text" id="content2_<?php echo $k?>"  value="<?php echo $v['token']?>"/>
-                    <button class="token" onclick="copy2(<?php echo $k?>)">复制</button></td>
-    <td><?=$v['user']?></td>
-    <td><a onclick="return confirm('确定删除')" href="<?=Url::to(['manage/del', 'id' => $v['id']]);?>">删除</a>||<a href="">修改</a>||<a href="">垃圾箱</a></td>
-   
+        <td><?=$v['rid']?></td>
+        <td><?=$v['rname']?></td>
+        <td><?=$v['rword']?></td>
+        <td><?=$v['rcontent']?></td>
+        <td><a href="">删除</a>||<a href="">修改</a></td>
     </tr>
     <?php } ?>
-
+    
     
     </tbody>
     
     </table>
- 
     
-<?php echo  LinkPager::widget([
-     'pagination' => $data['page'],
     
-
-     ]); ?>
-        
+    
+    
+    
+   
+    <div class="pagin">
+    	<div class="message">共<i class="blue">1256</i>条记录，当前显示第&nbsp;<i class="blue">2&nbsp;</i>页</div>
+        <ul class="paginList">
+        <li class="paginItem"><a href="javascript:;"><span class="pagepre"></span></a></li>
+        <li class="paginItem"><a href="javascript:;">1</a></li>
+        <li class="paginItem current"><a href="javascript:;">2</a></li>
+        <li class="paginItem"><a href="javascript:;">3</a></li>
+        <li class="paginItem"><a href="javascript:;">4</a></li>
+        <li class="paginItem"><a href="javascript:;">5</a></li>
+        <li class="paginItem more"><a href="javascript:;">...</a></li>
+        <li class="paginItem"><a href="javascript:;">10</a></li>
+        <li class="paginItem"><a href="javascript:;"><span class="pagenxt"></span></a></li>
         </ul>
     </div>
-
-       
-        
-       
-   
-
     
     
     <div class="tip">
@@ -180,21 +168,3 @@ $(document).ready(function(){
 </body>
 
 </html>
-<script>
-    //alert($);
-    function copy1(k)
-    {
-        var Url=document.getElementById('content1_'+k);
-        Url.select(); // 选择对象
-        document.execCommand("Copy"); // 执行浏览器复制命令
-        alert("OK");
-    }
-    function copy2(k)
-    {
-        var Url=document.getElementById('content2_'+k);
-        Url.select(); // 选择对象
-        document.execCommand("Copy"); // 执行浏览器复制命令
-        alert("OK");
-    }
-</script>
-
