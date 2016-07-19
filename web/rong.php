@@ -4,10 +4,29 @@
   */
 
 //define your token
+
+$str=$_GET['str'];
+include_once("./assets/abc.php");
+$pdo ->query("set names utf8");
+$rs = $pdo->query("SELECT * FROM my_gong where atok ='$str'");
+$result_arr = $rs->fetchAll();
+print_r($result_arr);die();
+foreach($result_arr as $val){
+    $token=$val['atoken'];
+    $tok=$val['atok'];
+    $url=$val['aurl'];
+    $id=$val['aid'];
+    $appid=$val['g_id'];
+    $appsecret=$val['g_secret'];
+}
+
+// define("ID","$id");
+// define("TOKEN", "$token");
+
 //验证 服务器和公众平台的钥匙
-define("TOKEN", "zhangzhirong");
-define("APPID", "wx23bf673d47ec4221");
-define("APPSECRET", "b8cc410994bff1c5778b85adc42db90b");
+define("TOKEN", "$token");
+define("APPID", "$appid");
+define("APPSECRET", "$appsecret");
 $wechatObj = new wechatCallbackapiTest();
 //验证服务器和公众平台建立连接
 //如果已经成功建立连接后把该方法注释
