@@ -15,7 +15,7 @@ $rs = $pdo->query("SELECT * FROM my_gong where atok ='$str'");
 $result_arr = $rs->fetchAll();
 // print_r($result_arr);die();
 foreach($result_arr as $val){
-    $token=$val['atoken'];
+    $token=$val['token'];
     $tok=$val['atok'];
     $url=$val['aurl'];
     $id=$val['id'];
@@ -32,7 +32,7 @@ define("APPID", "$appid");
 define("APPSECRET", "$appsecret");
 define("ID","$id");
 //查出库里的关键字
-// $res=$pdo->query("select rcontent from my_rules inner join my_rules_text on my_rules.rid = my_rules_text.rid where rcontent='荣' and g_id=".ID)->fetchAll();
+// $res=$pdo->query("select rcontent from my_rules inner join my_rules_text on my_rules.rid = my_rules_text.rid where rcontent='荣哥' and g_id=".ID)->fetchAll();
 // print_r($res);die(); 
 
 
@@ -44,41 +44,42 @@ $wechatObj = new wechatCallbackapiTest();
 $echoStr = $_GET["echostr"];
     if($echoStr)
     {
-        $wechatObj->valid();
+        $wechatObj->valid($pdo);
     }
     else
     {
-        $wechatObj->responseMsg();
+        $wechatObj->responseMsg($pdo);
     }
 
 class wechatCallbackapiTest
 {
-	public function valid()
+    public function valid($pdo)
     {
         $echoStr = $_GET["echostr"];
 
         //valid signature , option
         //连接成功后就直接退出
         if($this->checkSignature()){
-        	echo $echoStr;
-        	exit;
+            echo $echoStr;
+            $this->responseMsg($pdo);
+            exit;
         }
     }
     //获得服务器返回的信息
-    public function responseMsg()
+    public function responseMsg($pdo)
     {
-		//get post data, May be due to the different environments
+        //get post data, May be due to the different environments
         //接受用户及手机端发给服务器的信息，可以接受xml格式的数据
-		$postStr = $GLOBALS["HTTP_RAW_POST_DATA"];
+        $postStr = $GLOBALS["HTTP_RAW_POST_DATA"];
 
-      	//extract post data
-		if (!empty($postStr)){
+        //extract post data
+        if (!empty($postStr)){
                 /* libxml_disable_entity_loader is to prevent XML eXternal Entity Injection,
                    the best way is to check the validity of xml by yourself */
                 //只解析xml实体，不解析xml的结构，防止xxe攻击
                 libxml_disable_entity_loader(true);
                 //解析xml格式的数据
-              	$postObj = simplexml_load_string($postStr, 'SimpleXMLElement', LIBXML_NOCDATA);
+                $postObj = simplexml_load_string($postStr, 'SimpleXMLElement', LIBXML_NOCDATA);
                 //获取发送者的openid
                 $fromUsername = $postObj->FromUserName;
                 //开发者的微信号
@@ -90,13 +91,13 @@ class wechatCallbackapiTest
                 $time = time();
                 //定义发送文本类型的字符串
                 $textTpl = "<xml>
-							<ToUserName><![CDATA[%s]]></ToUserName>
-							<FromUserName><![CDATA[%s]]></FromUserName>
-							<CreateTime>%s</CreateTime>
-							<MsgType><![CDATA[%s]]></MsgType>
-							<Content><![CDATA[%s]]></Content>
-							<FuncFlag>0</FuncFlag>
-							</xml>";  
+                            <ToUserName><![CDATA[%s]]></ToUserName>
+                            <FromUserName><![CDATA[%s]]></FromUserName>
+                            <CreateTime>%s</CreateTime>
+                            <MsgType><![CDATA[%s]]></MsgType>
+                            <Content><![CDATA[%s]]></Content>
+                            <FuncFlag>0</FuncFlag>
+                            </xml>";  
                 //定义发送数据格式为音乐
                 $musicTpl = "<xml>
                             <ToUserName><![CDATA[%s]]></ToUserName>
@@ -125,78 +126,18 @@ class wechatCallbackapiTest
             // 判断用户发送数据的格式
             if($msgtype == 'text')
             {
-                if(!empty( $keyword ))
+                if(!empty($keyword))
                 {
-                    //定义回复的类型
-                    //如果用户输入音乐
-                    $res=$pdo->query("select rcontent from my_rules inner join my_rules_text on my_rules.rid = my_rules_text.rid where rcontent='$keyword' and g_id= ".ID)->fetchAll();
-                    if($re[0]['rcontent'])
+                    $res=$pdo->query("select rcontent from my_rules inner join my_rules_text on my_rules.rid = my_rules_text.rid where rword='$keyword' and g_id= ".ID)->fetchAll();
+                    if($res[0]['rcontent'])
                     {
                         $msgType = "text";
                         $contentStr = $res[0]["rcontent"];
                         $resultStr = sprintf($textTpl, $fromUsername, $toUsername, $time, $msgType, $contentStr);
                         echo $resultStr;
                     }
-                    // if($keyword=='音乐')
-                    // {
-                    //     $msgType = "music";
-                    //     $title = "I Love You";
-                    //     $description = "北美第一高音";
-                    //     $music_url = "http://www.yyzljg.com/wechat/music.mp3";
-                    //     $hp='http://www.yyzljg.com/wechat/music.mp3';
-                    //     //sprintf 格式化字符串
-                    //     $resultStr = sprintf($musicTpl, $fromUsername, $toUsername, $time, $msgType, $title, $description, $music_url, $hp);
-                    //     echo $resultStr;
-                    // }
-                    // elseif($keyword == '单图文')
-                    // {
-                    //     //定义回复的类型
-                    //     $msgType = "news";
-                    //     $count = 1;
-                    //     $str='<item>
-                    //             <Title><![CDATA[世界第一等]]></Title>
-                    //             <Description><![CDATA[其实什么好学呢]]></Description>
-                    //             <PicUrl><![CDATA[http://llzif.top/weixin/pic/1.jpg]]></PicUrl>
-                    //             <Url><![CDATA[http://llzif.top/weixin/pic/1.jpg]]></Url>
-                    //             </item>';
-                    //     //sprintf 格式化字符串
-                    //     $resultStr = sprintf($newsTpl, $fromUsername, $toUsername, $time, $msgType, $count,$str);
-                    //     echo $resultStr;
-                    // }
-                    // elseif($keyword == '多图文')
-                    // {
-                    //     //定义回复的类型
-                    //     $msgType = "news";
-                    //     $count = 4;
-                    //     $str='';
-                    //     for ($i=1; $i <= $count; $i++) { 
-                    //         $str.="<item>
-                    //             <Title><![CDATA[世界第一等]]></Title>
-                    //             <Description><![CDATA[其实什么好学呢]]></Description>
-                    //             <PicUrl><![CDATA[http://llzif.top/weixin/pic/{$i}.jpg]]></PicUrl>
-                    //             <Url><![CDATA[http://llzif.top/weixin/pic/{$i}.jpg]]></Url>
-                    //             </item>";
-                    //     }
-                    //       $resultStr = sprintf($newsTpl, $fromUsername, $toUsername, $time, $msgType, $count,$str);
-                    //     echo $resultStr;
-                    // }
                     else
                     {
-                        //定义回复的类型
-                        // $msgType = "text";
-                        //小黄鸡机器人
-                        // $ch = curl_init();
-                        //  $url="http://www.niurenqushi.com/app/simsimi/ajax.aspx";
-                        //  curl_setopt($ch, CURLOPT_URL, $url);
-                        //  curl_setopt($ch, CURLOPT_RETURNTRANSFER,1);
-                        //  curl_setopt($ch, CURLOPT_POST,1);
-                        //  $data=array(
-                        //         'txt'=>$keyword,
-                        //     );
-                        //  curl_setopt($ch,CURLOPT_POSTFIELDS,$data);
-                        // $str = curl_exec($ch);
-
-
 
                     //图灵机器人
                     $url="http://www.tuling123.com/openapi/api?key=442806f53bb6af5927aabf5b6e2951e9&info=".$keyword;
@@ -210,9 +151,7 @@ class wechatCallbackapiTest
 
 
 
-                        $resultStr = sprintf($textTpl, $fromUsername, $toUsername, $time, $msgType,$str);
-                        echo $resultStr;
-
+                       
                     }
 
                     
@@ -247,16 +186,16 @@ class wechatCallbackapiTest
                     $resultStr = sprintf($textTpl, $fromUsername, $toUsername, $time, $msgType, $contentStr);
                     echo $resultStr;
             }
-				
+                
 
         }else {
-        	echo "";
-        	exit;
+            echo "";
+            exit;
         }
     }
-		
-	private function checkSignature()
-	{
+        
+    private function checkSignature()
+    {
         // you must define TOKEN by yourself
         if (!defined("TOKEN")) {
             throw new Exception('TOKEN is not defined!');
@@ -265,20 +204,20 @@ class wechatCallbackapiTest
         $signature = $_GET["signature"];
         $timestamp = $_GET["timestamp"];
         $nonce = $_GET["nonce"];
-        		
-		$token = TOKEN;
-		$tmpArr = array($token, $timestamp, $nonce);
+                
+        $token = TOKEN;
+        $tmpArr = array($token, $timestamp, $nonce);
         // use SORT_STRING rule
-		sort($tmpArr, SORT_STRING);
-		$tmpStr = implode( $tmpArr );
-		$tmpStr = sha1( $tmpStr );
-		
-		if( $tmpStr == $signature ){
-			return true;
-		}else{
-			return false;
-		}
-	}
+        sort($tmpArr, SORT_STRING);
+        $tmpStr = implode( $tmpArr );
+        $tmpStr = sha1( $tmpStr );
+        
+        if( $tmpStr == $signature ){
+            return true;
+        }else{
+            return false;
+        }
+    }
 }
 
 ?>
