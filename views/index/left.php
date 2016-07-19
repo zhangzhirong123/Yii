@@ -56,7 +56,7 @@ $(function(){
     <ul class="menuson">
         <li><cite></cite><a href="?r=rules/index" target="rightFrame">编辑内容</a><i></i></li>
         <li><cite></cite><a href="?r=rules/lists" target="rightFrame">管理文字回复</a><i></i></li>
-        <li><cite></cite><a href="#">档案列表显示</a><i></i></li>
+        <li><cite></cite><a href="?r=rules/menu">创建菜单</a><i></i></li>
         </ul>     
     </dd> 
     
