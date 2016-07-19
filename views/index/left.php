@@ -42,11 +42,7 @@ $(function(){
         <li class="active"><cite></cite><a href="?r=index/index1" target="rightFrame">首页模版</a><i></i></li>
         <li><cite></cite><a href="?r=manage/add" target="rightFrame">添加公众号</a><i></i></li>
         <li><cite></cite><a href="?r=manage/lists" target="rightFrame">公众号列表</a><i></i></li>
-        <li><cite></cite><a href="form.html" target="rightFrame">添加编辑</a><i></i></li>
-        <li><cite></cite><a href="imglist.html" target="rightFrame">图片列表</a><i></i></li>
-        <li><cite></cite><a href="imglist1.html" target="rightFrame">自定义</a><i></i></li>
-        <li><cite></cite><a href="tools.html" target="rightFrame">常用工具</a><i></i></li>
-        <li><cite></cite><a href="filelist.html" target="rightFrame">信息管理</a><i></i></li>
+       
         <li><cite></cite><a href="?r=manage/tab" target="rightFrame">Tab页</a><i></i></li>
         <li><cite></cite><a href="?r=manage/error" target="rightFrame">404页面</a><i></i></li>
         </ul>    
@@ -55,7 +51,7 @@ $(function(){
     
     <dd>
     <div class="title">
-    <span><img src="images/leftico02.png" /></span>其他设置
+    <span><img src="images/leftico02.png" /></span>自定义回复
     </div>
     <ul class="menuson">
         <li><cite></cite><a href="#">编辑内容</a><i></i></li>

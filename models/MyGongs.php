@@ -34,8 +34,8 @@ class MyGongs extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['g_id', 'u_id'], 'integer'],
-            [['g_name', 'g_secret', 'g_desc', 'g_img', 'is_show', 'token', 'url'], 'string', 'max' => 255],
+            [['u_id'], 'integer'],
+            [['g_name', 'g_secret', 'g_desc', 'g_img', 'is_show', 'token', 'url','atok'], 'string', 'max' => 255],
             [['g_name', 'g_secret', 'g_desc','g_id'], 'required'],
             [['g_img'], 'file', 'extensions' => 'jpg, png', 'mimeTypes' => 'image/jpeg, image/png',],
         ];
@@ -49,7 +49,7 @@ class MyGongs extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'g_name' => '公众号名称',
-            'g_id' => '公众号名称ID',
+            'g_id' => '公众号ID',
             'g_secret' => 'APPSecret',
             'g_desc' => '公众号描述',
             'g_img' => '公众号图片',
@@ -57,6 +57,7 @@ class MyGongs extends \yii\db\ActiveRecord
             'u_id' => 'U ID',
             'token' => 'Token',
             'url' => 'Url',
+            'atok'=>'atok'
         ];
     }
        

@@ -47,6 +47,7 @@ class ManageController extends \yii\web\Controller
                 $data['MyGongs']['g_img']='upload/'.$imageName;
                 $data['MyGongs']['url']=$url;
                 $data['MyGongs']['token']=md5(rand(100,900));
+                $data['MyGongs']['atok']=$atok;
                 $session = Yii::$app->session;
                 $userInfo = $session->get('userInfo');
                 // print_r($userInfo);die();
@@ -58,6 +59,7 @@ class ManageController extends \yii\web\Controller
                 $model->attributes = $data['MyGongs'];
                 if($model->insert())
                     {
+
                         $this->redirect(['lists']);
                     }else
                     {
