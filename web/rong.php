@@ -10,7 +10,7 @@ include_once("./assets/abc.php");
 $pdo ->query("set names utf8");
 $rs = $pdo->query("SELECT * FROM my_gong where atok ='$str'");
 $result_arr = $rs->fetchAll();
-print_r($result_arr);die();
+// print_r($result_arr);die();
 foreach($result_arr as $val){
     $token=$val['atoken'];
     $tok=$val['atok'];

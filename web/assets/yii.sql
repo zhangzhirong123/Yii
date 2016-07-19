@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50617
 File Encoding         : 65001
 
-Date: 2016-07-19 09:53:09
+Date: 2016-07-19 09:55:57
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -37,7 +37,6 @@ CREATE TABLE `my_gong` (
 -- ----------------------------
 -- Records of my_gong
 -- ----------------------------
-INSERT INTO `my_gong` VALUES ('2', '第一个', '123', '123', '123', 'upload/1468892943949.jpg', '0', 'http://www.chengjiajia.com/9/Yii/web/rong.php?str=x4Jlo', 'dc5689792e08eb2e219dce49e64c885b', '1', 'x4Jlo');
 
 -- ----------------------------
 -- Table structure for my_user
@@ -48,9 +47,10 @@ CREATE TABLE `my_user` (
   `user` varchar(255) DEFAULT NULL,
   `poss` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`u_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of my_user
 -- ----------------------------
 INSERT INTO `my_user` VALUES ('1', 'admin', '123');
+INSERT INTO `my_user` VALUES ('2', 'admin', '123');
