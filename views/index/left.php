@@ -55,12 +55,14 @@ $(function(){
     
     <dd>
     <div class="title">
-    <span><img src="images/leftico02.png" /></span>其他设置
+    <span><img src="images/leftico02.png" /></span>社区管理
     </div>
     <ul class="menuson">
-        <li><cite></cite><a href="#">编辑内容</a><i></i></li>
-        <li><cite></cite><a href="#">发布信息</a><i></i></li>
-        <li><cite></cite><a href="#">档案列表显示</a><i></i></li>
+        <li><cite></cite><a href="index.php?r=topic/index" target="rightFrame">话题管理</a><i></i></li>
+        <li><cite></cite><a href="#">公告管理</a><i></i></li>
+        <li><cite></cite><a href="#">用户管理</a><i></i></li>
+        <li><cite></cite><a href="#">社区数据</a><i></i></li>
+        <li><cite></cite><a href="#">设置</a><i></i></li>
         </ul>     
     </dd> 
     
