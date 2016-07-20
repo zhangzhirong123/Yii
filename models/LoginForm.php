@@ -4,7 +4,7 @@ namespace app\models;
 
 use Yii;
 use yii\base\Model;
-
+use yii\captcha\Captcha;
 
 /**
  * LoginForm is the model behind the login form.
@@ -14,7 +14,7 @@ class LoginForm extends Model
     public $username;
     public $password;
     public $rememberMe = true;
-
+    public $verifyCode; 
     private $_user = false;
 
 
@@ -30,9 +30,17 @@ class LoginForm extends Model
             // ['rememberMe', 'boolean'],
             // password is validated by validatePassword()
             ['password', 'validatePassword'],
+            // ['verifyCode', 'captcha'],//注意这里，在百度中查到很多教程，这里写的都不一样，最 简单的写法就像我这种写法，当然还有其它各种写法 
+            
         ];
     }
-
+    public function attributeLabels()
+    {
+        return [
+            
+            'verifyCode' => '验证码', 
+        ];
+    }
     /**
      * Validates the password.
      * This method serves as the inline validation for password.
@@ -67,6 +75,7 @@ class LoginForm extends Model
         }
         
     }
+   
     /**
      * Logs in a user using the provided username and password.
      * @return boolean whether the user is logged in successfully

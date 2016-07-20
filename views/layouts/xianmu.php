@@ -36,11 +36,11 @@ AppAsset::register($this);
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => [
-            ['label' => 'Home', 'url' => ['/site/index']],
-            ['label' => 'About', 'url' => ['/site/about']],
-            ['label' => 'Contact', 'url' => ['/site/contact']],
+            ['label' => '', 'url' => ['']],
+            ['label' => '', 'url' => ['']],
+            ['label' => '', 'url' => ['']],
             Yii::$app->user->isGuest ? (
-                ['label' => 'Login', 'url' => ['/site/login']]
+                ['label' => '', 'url' => ['']]
             ) : (
                 '<li>'
                 . Html::beginForm(['/site/logout'], 'post')
@@ -56,12 +56,12 @@ AppAsset::register($this);
     // NavBar::end();
     ?>
 
-    <div class="container">
+     <div class="container">
         <?= Breadcrumbs::widget([
             'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-        ]) ?>
+        ]) ?> 
         <?= $content ?>
-    </div>
+    </div> 
 </div>
 
 <footer class="footer">
@@ -70,7 +70,7 @@ AppAsset::register($this);
 
         <p class="pull-right"><?= Yii::powered() ?></p>
     </div>
-</footer>
+</footer> 
 
 <?php $this->endBody() ?>
 </body>

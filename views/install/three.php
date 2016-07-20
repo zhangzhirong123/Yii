@@ -85,7 +85,7 @@
 
 </tbody></table>
 </form>
-		<div class="footer">©2001 - 2011 <a href="http://www.comsenz.com/">Comsenz</a> Inc.</div>
+		<div class="footer">©2016 - 2020 <a href="http://www.comsenz.com/">Comsenz</a> Inc.</div>
 	</div>
 </div>
 
