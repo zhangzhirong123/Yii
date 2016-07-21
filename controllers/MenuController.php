@@ -18,7 +18,7 @@ class MenuController extends \yii\web\Controller
         $sql="select * from my_gong ";
         $connection=\Yii::$app->db->createCommand($sql);
         $arr=$connection->queryAll();
-		//include ('../views/layouts/menu.php');
+        //include ('../views/layouts/menu.php');
         return $this->renderPartial('index',['arr'=>$arr]);
     }
     public function actionAdd(){
@@ -27,18 +27,20 @@ class MenuController extends \yii\web\Controller
     public function actionToken(){
         $db = \Yii::$app->db->createCommand();
         $arr=Yii::$app->request->post();
-        print_r($arr);die();
+        // print_r($arr);die();
         // var_dump($arr['do']);
         $id=$arr['di'];
        // var_dump($arr);die;
         $sql="select * from my_gong where id='$id' ";
         $connection=\Yii::$app->db->createCommand($sql);
         $data=$connection->queryAll();
-        $appid=$data[0]['appid'];
-        $appsecret=$data[0]['appsecret'];
+        // print_r($data);die();
+        $appid=$data[0]['g_id'];
+        $appsecret=$data[0]['g_secret'];
         $memcache = \Yii::$app->cache;
        // $memcache->flush();die;
         $zhi=$memcache->get("zhi");
+        // echo $zhi;die();
         if(@!$zhi) {
             $url = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=$appid&secret=$appsecret";
             $ch = curl_init();
@@ -53,6 +55,7 @@ class MenuController extends \yii\web\Controller
             $memcache->set("zhi",$access_token,7000);
         }
         $zhi=$memcache->get("zhi");
+        // echo $zhi;die();
         $url = "https://api.weixin.qq.com/cgi-bin/menu/create?access_token=$zhi";
         $method="POST";
         $data=$arr['do'];

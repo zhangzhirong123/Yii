@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50617
 File Encoding         : 65001
 
-Date: 2016-07-19 14:11:19
+Date: 2016-07-21 14:54:39
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -22,7 +22,7 @@ DROP TABLE IF EXISTS `my_gong`;
 CREATE TABLE `my_gong` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `g_name` varchar(255) DEFAULT NULL,
-  `g_id` int(11) DEFAULT NULL,
+  `g_id` varchar(255) DEFAULT NULL,
   `g_secret` varchar(255) DEFAULT NULL,
   `g_desc` varchar(255) DEFAULT NULL,
   `g_img` varchar(255) DEFAULT NULL,
@@ -32,7 +32,11 @@ CREATE TABLE `my_gong` (
   `u_id` int(11) DEFAULT NULL,
   `atok` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of my_gong
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for my_rules
@@ -44,7 +48,11 @@ CREATE TABLE `my_rules` (
   `rname` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
   `rword` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
   PRIMARY KEY (`rid`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+-- Records of my_rules
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for my_rules_text
@@ -55,7 +63,11 @@ CREATE TABLE `my_rules_text` (
   `rid` int(11) DEFAULT NULL,
   `rcontent` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
   PRIMARY KEY (`tid`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+-- Records of my_rules_text
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for my_user
@@ -66,4 +78,8 @@ CREATE TABLE `my_user` (
   `user` varchar(255) DEFAULT NULL,
   `poss` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`u_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of my_user
+-- ----------------------------

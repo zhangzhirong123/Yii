@@ -342,13 +342,14 @@
         $.post("index.php?r=menu/token", { di: data, do: dats },
             function(data){
                // alert(data);
-                if(data=='2'){
+               console.log(data);
+                if(data.errcode=='0'){
                     alert("修改成功");
                 }else if(data=='40013'){
                     alert("您的Appid 或 Appsecret 错误");
                 }else{
                     alert("您的公众号API功能未授权");
                 }
-            });
+            },'json');
     }
 </script>
