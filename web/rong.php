@@ -156,7 +156,11 @@ class wechatCallbackapiTest
 
                     
                 }else{
-                    echo "Input something...";
+                      $msgType = "text";
+                        $contentStr = "欢迎关注";
+                        $resultStr = sprintf($textTpl, $fromUsername, $toUsername, $time, $msgType, $contentStr);
+                        echo $resultStr;
+                    // echo "Input something...";
                 }
             }
             elseif ($msgtype == 'image') 
