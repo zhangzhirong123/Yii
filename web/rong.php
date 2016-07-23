@@ -121,7 +121,18 @@ class wechatCallbackapiTest
                             <Articles>
                             %s
                             </Articles>
-                            </xml>";   
+                            </xml>";  
+
+                $dingTpl = "<xml>
+                            <ToUserName><![CDATA[%s]]></ToUserName>
+                            <FromUserName><![CDATA[%s]]></FromUserName>
+                            <CreateTime>%s</CreateTime>
+                            <MsgType><![CDATA[%s]]></MsgType>
+                            <Event><![CDATA[%s]]></Event>
+                            <Latitude>%s</Latitude>
+                            <Longitude>%s</Longitude>
+                            <Precision>%s</Precision>
+                            </xml>"; 
                          
             // 判断用户发送数据的格式
             if($msgtype == 'text')
@@ -134,6 +145,38 @@ class wechatCallbackapiTest
                         $msgType = "text";
                         $contentStr = $res[0]["rcontent"];
                         $resultStr = sprintf($textTpl, $fromUsername, $toUsername, $time, $msgType, $contentStr);
+                        echo $resultStr;
+                    }
+                    elseif($keyword == '单图文')
+                    {
+                        //定义回复的类型
+                        $msgType = "news";
+                        $count = 1;
+                        $str='<item>
+                                <Title><![CDATA[世界第一等]]></Title>
+                                <Description><![CDATA[其实什么好学呢]]></Description>
+                                <PicUrl><![CDATA[http://www.pentaxiu.com/weixin/pic/1.jpg]]></PicUrl>
+                                <Url><![CDATA[http://www.pentaxiu.com/weixin/pic/1.jpg]]></Url>
+                                </item>';
+                        //sprintf 格式化字符串
+                        $resultStr = sprintf($newsTpl, $fromUsername, $toUsername, $time, $msgType, $count,$str);
+                        echo $resultStr;
+                    }
+                    elseif($keyword == '多图文')
+                    {
+                        //定义回复的类型
+                        $msgType = "news";
+                        $count = 4;
+                        $str='';
+                        for ($i=1; $i <= $count; $i++) { 
+                            $str.="<item>
+                                <Title><![CDATA[世界第一等]]></Title>
+                                <Description><![CDATA[其实什么好学呢]]></Description>
+                                <PicUrl><![CDATA[http://www.pentaxiu.com/weixin/pic/{$i}.jpg]]></PicUrl>
+                                <Url><![CDATA[http://www.pentaxiu.com/weixin/pic/{$i}.jpg]]></Url>
+                                </item>";
+                        }
+                          $resultStr = sprintf($newsTpl, $fromUsername, $toUsername, $time, $msgType, $count,$str);
                         echo $resultStr;
                     }
                     else
@@ -190,7 +233,15 @@ class wechatCallbackapiTest
                     $resultStr = sprintf($textTpl, $fromUsername, $toUsername, $time, $msgType, $contentStr);
                     echo $resultStr;
             }
-                
+            elseif ($msgtype == 'event') 
+            {
+                //定义回复的类型
+                    $msgType = "ding";
+                    $contentStr = "正在获取地理位置";
+                    //sprintf 格式化字符串
+                    $resultStr = sprintf($dingTpl, $fromUsername, $toUsername, $time, $msgType, $contentStr);
+                    echo $resultStr;
+            } 
 
         }else {
             echo "";

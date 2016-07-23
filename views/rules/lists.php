@@ -1,3 +1,8 @@
+<?php
+
+use yii\helpers\Url;
+
+?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -90,7 +95,7 @@ $(document).ready(function(){
         <td><?=$v['rname']?></td>
         <td><?=$v['rword']?></td>
         <td><?=$v['rcontent']?></td>
-        <td><a href="">删除</a>||<a href="">修改</a></td>
+        <td><a href="<?=Url::to(['rules/del', 'id' => $v['rid']]);?>">删除</a>||<a href="">修改</a></td>
     </tr>
     <?php } ?>
     

@@ -51,4 +51,14 @@ class RulesController extends \yii\web\Controller
         // print_r($arr);die();
         return $this->renderPartial('lists',['data'=>$arr]);
 	}
+    /**
+     * 删除
+     */
+    public function actionDel($id)
+    {
+        $connection=\Yii::$app->db;
+        $connection->createCommand()->delete('my_rules', "rid = $id")->execute();
+        $connection->createCommand()->delete('my_rules_text', "rid = $id")->execute();
+        $this->redirect(['lists']);
+    }
 }
