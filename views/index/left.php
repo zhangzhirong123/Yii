@@ -51,12 +51,14 @@ $(function(){
     
     <dd>
     <div class="title">
-    <span><img src="images/leftico02.png" /></span>自定义回复
+    <span><img src="images/leftico02.png" /></span>功能开发 
     </div>
     <ul class="menuson">
         <li><cite></cite><a href="?r=rules/index" target="rightFrame">编辑内容</a><i></i></li>
         <li><cite></cite><a href="?r=rules/lists" target="rightFrame">管理文字回复</a><i></i></li>
         <li><cite></cite><a href="?r=menu/index" target="rightFrame">创建菜单</a><i></i></li>
+        <li><cite></cite><a href="?r=menu/erweima" target="rightFrame">生成二维码</a><i></i></li>
+        <li><cite></cite><a href="?r=sucai/index" target="rightFrame">上传图文</a><i></i></li>
         </ul>     
     </dd> 
     
