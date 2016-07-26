@@ -8,7 +8,7 @@
 
 <body>
 
-	<div class="place">
+    <div class="place">
     <span>位置：</span>
     <ul class="placeul">
     <li><a href="#">首页</a></li>
@@ -19,12 +19,12 @@
     <div class="formbody">
     
     <div class="formtitle"><span>添加规则</span></div>
-    <form action="?r=sucai/add" method="post">
+    <form action="?r=sucai/add" method="post" enctype = 'multipart/form-data'>
     <input name="_csrf" type="hidden" id="_csrf" value="<?= Yii::$app->request->csrfToken ?>">
     <ul class="forminfo">
     <li><label>公众号名称</label>
         
-    <select name="g_name" class="dfinput">
+    <select name="g_id" class="dfinput">
         <?php
         foreach($data as $val){
         ?>
@@ -37,8 +37,9 @@
     <i></i></li>
     <li><label>回复规则名称</label><input name="fname" type="text" class="dfinput" /><i>回复规则名称不能超过30个字符</i></li>
     <li><label>触发关键字</label><input name="fword" type="text" class="dfinput" /><i>多个关键字用,隔开</i></li>
+    <li><label>标题</label><input name="title" type="text" class="dfinput" /><i></i></li>
     <li><label>图片</label><input name="filename" type="file" class="dfinput" /><i>最大2M</i></li>
-    <li><label>回复内容</label><textarea name="fcontent" cols="" rows="" class="textinput"></textarea></li>
+    <li><label>内容</label><textarea name="fcontent" cols="" rows="" class="textinput"></textarea></li>
     <li><label>&nbsp;</label><input name="" type="submit" class="btn" value="确认保存"/></li>
     </ul>
     </form>
