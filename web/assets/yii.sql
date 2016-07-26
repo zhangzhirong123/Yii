@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50617
 File Encoding         : 65001
 
-Date: 2016-07-21 14:54:39
+Date: 2016-07-26 14:26:06
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -67,6 +67,26 @@ CREATE TABLE `my_rules_text` (
 
 -- ----------------------------
 -- Records of my_rules_text
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for my_sucai
+-- ----------------------------
+DROP TABLE IF EXISTS `my_sucai`;
+CREATE TABLE `my_sucai` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `g_name` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
+  `fname` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
+  `fword` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
+  `filename` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
+  `fcontent` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
+  `uid` int(11) DEFAULT NULL,
+  `link` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+-- Records of my_sucai
 -- ----------------------------
 
 -- ----------------------------
