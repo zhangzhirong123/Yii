@@ -32,10 +32,10 @@ define("APPID", "$appid");
 define("APPSECRET", "$appsecret");
 define("ID","$id");
 //查出库里的关键字
-// $res=$pdo->query("select rcontent from my_rules inner join my_rules_text on my_rules.rid = my_rules_text.rid where rcontent='荣哥' and g_id=".ID)->fetchAll();
+// $res=$pdo->query("select rcontent from my_rules inner join my_rules_text on my_rules.rid = my_rules_text.rid where rcontent='大声道' and g_id=1")->fetchAll();
 // print_r($res);die(); 
-
-
+// $res=$pdo->query("select * from my_sucai  where fword='我邪恶' and g_id=1")->fetchAll();
+// print_r($res);die();
 $wechatObj = new wechatCallbackapiTest();
 //验证服务器和公众平台建立连接
 //如果已经成功建立连接后把该方法注释
@@ -133,13 +133,16 @@ class wechatCallbackapiTest
                             <Longitude>%s</Longitude>
                             <Precision>%s</Precision>
                             </xml>"; 
-                         
+   
             // 判断用户发送数据的格式
             if($msgtype == 'text')
             {
                 if(!empty($keyword))
                 {
                     $res=$pdo->query("select rcontent from my_rules inner join my_rules_text on my_rules.rid = my_rules_text.rid where rword='$keyword' and g_id= ".ID)->fetchAll();
+                    
+                    $res1=$pdo->query("select * from my_sucai where fword='$keyword' and g_id= ".ID)->fetchAll();
+
                     if($res[0]['rcontent'])
                     {
                         $msgType = "text";
@@ -147,6 +150,40 @@ class wechatCallbackapiTest
                         $resultStr = sprintf($textTpl, $fromUsername, $toUsername, $time, $msgType, $contentStr);
                         echo $resultStr;
                     }
+                    if($res1[0]['fname'])
+                    {
+                       // $msgType = "news";
+                       //  $count = 1;
+                       //  $title = $res1[0]['title'];
+                       //  $desc = $res1[0]['fcontent'];
+                       //  $PicUrl =$res[0]['link'];
+                       //  $Url =$res[0]['link'];
+                       //  $resultStr = sprintf($news1Tpl, $fromUsername, $toUsername, $time, $msgType, $count,$title,$desc,$PicUrl,$Url);
+                       //  echo $resultStr;
+                        $itemTpl = "<item>
+                        <Title><![CDATA[%s]]></Title>
+                        <Description><![CDATA[%s]]></Description>
+                        <PicUrl><![CDATA[%s]]></PicUrl>
+                        <Url><![CDATA[%s]]></Url>
+                     </item>";
+                      $item_str = "";
+                    foreach ($res1 as $item){
+                        $item_str .= sprintf($itemTpl, $item['title'], $item['fcontent'], $item['link'], $item['link']);
+                            }
+                    
+                        $newssTpl = "<xml>
+                        <ToUserName><![CDATA[%s]]></ToUserName>
+                        <FromUserName><![CDATA[%s]]></FromUserName>
+                        <CreateTime>%s</CreateTime>
+                        <MsgType><![CDATA[news]]></MsgType>
+                        <Content><![CDATA[]]></Content>
+                        <ArticleCount>%s</ArticleCount>
+                        <Articles>
+                        $item_str</Articles>
+                        </xml>";
+                $resultStr = sprintf($newssTpl, $fromUsername, $toUsername, $time, count($res1));
+                     echo  $resultStr;
+                 }
                     elseif($keyword == '单图文')
                     {
                         //定义回复的类型
