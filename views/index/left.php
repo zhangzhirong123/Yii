@@ -59,6 +59,7 @@ $(function(){
         <li><cite></cite><a href="?r=menu/index" target="rightFrame">创建菜单</a><i></i></li>
         <li><cite></cite><a href="?r=menu/erweima" target="rightFrame">生成二维码</a><i></i></li>
         <li><cite></cite><a href="?r=sucai/index" target="rightFrame">上传图文</a><i></i></li>
+        <li><cite></cite><a href="?r=sucai/lists" target="rightFrame">我的素材</a><i></i></li>
         </ul>     
     </dd> 
     

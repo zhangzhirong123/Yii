@@ -105,7 +105,15 @@ class SucaiController extends \yii\web\Controller
      */
     public function actionLists()
     {
-        echo 123;die();
+        $session = Yii::$app->session;
+        $userInfo = $session->get('userInfo');        
+        $uid = $userInfo['u_id'];
+        // echo $uid;die();
+        $sql="select * from my_sucai where uid = $uid";
+        $connection=\Yii::$app->db->createCommand($sql);
+        $arr=$connection->queryAll();
+        // print_r($arr);die();
+        return $this->renderPartial('lists',['data'=>$arr]);
     }
 
     public static function upload($url,$filedata){  
@@ -130,5 +138,51 @@ class SucaiController extends \yii\web\Controller
         return $output;  
           
     }
+    /**
+     * 删除素材
+     */
+    public function actionDel($id)
+    {
+
+          $memcache = \Yii::$app->cache;
+            // $memcache->flush();die;
+            $access_token=$memcache->get("access_token");
+           if(@!$access_token) {
+            $url = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=wxf2e8db182cbb9cc8&secret=11041f9973bd50ee4156a048b1de8515";
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_URL, $url);
+            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
+            curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, FALSE);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+            $output = curl_exec($ch);
+            curl_close($ch);
+            $jsoninfo = json_decode($output, true);
+            $access_token = $jsoninfo["access_token"];
+            $memcache->set("access_token",$access_token,7000);
+        }
+        // echo $access_token;die();
+        $model = new MySucai;
+        $sql="select * from my_sucai where id = $id";
+        $connection=\Yii::$app->db->createCommand($sql);
+        $arr=$connection->queryOne();
+        // print_r($arr);die();
+        $url="https://api.weixin.qq.com/cgi-bin/material/del_material?access_token=$access_token";
+        $media = $arr['link'];
+        // echo $media;die(); 
+        $filedata = array('media_id'=>$media);
+        $filedata = json_encode($filedata,true);
+        // echo $filedata;die();
+        $result = $this->upload($url, $filedata);
+        $result = json_decode($result, true);
+        print_r($result);
+        // if($result['errcode']==0){
+        //     echo "素材删除成功";
+        // }elseif ($result['errcode']==40007) {
+        //     echo "素材ID不正确";
+        // }
+        // dump($result);
+    }
+
+   
 
 }

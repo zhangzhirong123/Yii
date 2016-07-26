@@ -5,6 +5,6 @@
 	<title>Document</title>
 </head>
 <body>
-	<a href="<?=$url?>"><?=$url?></a>
+	<a href="<?=$url?>">查看</a>
 </body>
 </html>
