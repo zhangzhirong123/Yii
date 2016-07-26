@@ -7,12 +7,13 @@ use yii\web\Controller;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\MySucai;
+use  yii\web\Session;
 class SucaiController extends \yii\web\Controller
 {
 
     public function actionIndex()
     {
-    	$sql="select * from my_gong ";
+        $sql="select * from my_gong ";
         $connection=\Yii::$app->db->createCommand($sql);
         // var_dump($connection);die();
         $data=$connection->queryAll();
@@ -24,10 +25,11 @@ class SucaiController extends \yii\web\Controller
      */
     public function actionAdd()
     {
-    	  $request=Yii::$app->request;
+          $request=Yii::$app->request;
          $memcache = \Yii::$app->cache;
         if($request->isPost){
-        	$data = Yii::$app->request->post();
+            $res = Yii::$app->request->post();
+            // print_r($res);die();
             // 获取access_token   
             $memcache = \Yii::$app->cache;
             // $memcache->flush();die;
@@ -63,6 +65,7 @@ class SucaiController extends \yii\web\Controller
                     $data=json_decode($result);  
                     if(isset($data->url)){  
                         $url=$data->url;//得到url  
+                        // echo $url;die();
                     }else{  
                         echo "no media_id!"; die; 
                     }  
@@ -70,15 +73,17 @@ class SucaiController extends \yii\web\Controller
                     echo 'error';  die;
                 }
                 $model = new MySucai();
+                $session = Yii::$app->session;
                 $userInfo = $session->get('userInfo');
                 // print_r($userInfo);die();
                 $uid = $userInfo['u_id'];
                 // echo $uid;die();
-             
-                $data['MySucai']['uid']=$uid; 
-                $data['MySucai']['link']=$url;
-                $data['MySucai']['filename']=$path;
-                $model->attributes = $data['MyGongs'];
+                // print_r($res);die();
+                $res['uid']=$uid; 
+                $res['link']=$url;
+                $res['filename']=$path;
+                // print_r($res);die();
+                $model->attributes = $res;
                 if($model->insert())
                     {
 
@@ -100,7 +105,7 @@ class SucaiController extends \yii\web\Controller
      */
     public function actionLists()
     {
-    	echo 123;die();
+        echo 123;die();
     }
 
     public static function upload($url,$filedata){  

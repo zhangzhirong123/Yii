@@ -33,7 +33,7 @@ class MySucai extends \yii\db\ActiveRecord
     {
         return [
             [['uid'], 'integer'],
-            [['g_name', 'fname', 'fword', 'filename', 'fcontent', 'link'], 'string', 'max' => 255]
+            [['g_id', 'fname', 'fword', 'filename', 'fcontent', 'link','title'], 'string', 'max' => 255]
         ];
     }
 
@@ -44,13 +44,14 @@ class MySucai extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'g_name' => 'G Name',
+            'g_id' => 'G Name',
             'fname' => 'Fname',
             'fword' => 'Fword',
             'filename' => 'Filename',
             'fcontent' => 'Fcontent',
             'uid' => 'Uid',
             'link' => 'Link',
+            'title'=>'Title',
         ];
     }
 }
