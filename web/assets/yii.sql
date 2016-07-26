@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50617
 File Encoding         : 65001
 
-Date: 2016-07-26 14:26:06
+Date: 2016-07-26 20:04:56
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -75,13 +75,14 @@ CREATE TABLE `my_rules_text` (
 DROP TABLE IF EXISTS `my_sucai`;
 CREATE TABLE `my_sucai` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `g_name` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
+  `g_id` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
   `fname` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
   `fword` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
   `filename` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
   `fcontent` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
   `uid` int(11) DEFAULT NULL,
   `link` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
+  `title` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
