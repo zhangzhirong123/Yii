@@ -47,6 +47,7 @@ class SucaiController extends \yii\web\Controller
             $access_token = $jsoninfo["access_token"];
             $memcache->set("access_token",$access_token,7000);
         }
+        // echo $access_token;die();
             //接收图片
             $file=$_FILES['filename'];
             // print_r($file);die;
